@@ -1,21 +1,28 @@
+import { IFrameProps, getFrameMetaTags } from "@/utils/frame";
 import { Metadata } from "next";
+
+// Here, we put the home frame metadata
+
+const INITIAL_FRAME_PROPS: IFrameProps = {
+  imageUrl:
+    "https://hips.hearstapps.com/hmg-prod/images/people-playing-paper-rock-scissors-royalty-free-illustration-1583269312.jpg",
+  postUrl: `${process.env.DOMAIN_URL}/frames`,
+  buttons: ["PLAY"],
+};
 
 export const metadata: Metadata = {
   title: "Rock Paper Scissors",
   other: {
-    "fc:frame": "vNext",
-    "fc:frame:image": "https://hips.hearstapps.com/hmg-prod/images/people-playing-paper-rock-scissors-royalty-free-illustration-1583269312.jpg",
-    "og:image": "https://hips.hearstapps.com/hmg-prod/images/people-playing-paper-rock-scissors-royalty-free-illustration-1583269312.jpg",
-    "xmtp:frame:post-url":
-      "https://be23-2a01-cb04-85e-2800-75a9-4f30-c89-94fe.ngrok-free.app/frames",
-    "fc:frame:button:1": "Play!",
+    "og:image":
+      "https://hips.hearstapps.com/hmg-prod/images/people-playing-paper-rock-scissors-royalty-free-illustration-1583269312.jpg",
+    ...getFrameMetaTags(INITIAL_FRAME_PROPS),
   },
 };
 
 export default function Home() {
   return (
     <>
-      <div>MAIN PAGE CONTENT</div>
+      <div>Rock / Paper / Scissors XMTP Frame by Converse</div>
     </>
   );
 }

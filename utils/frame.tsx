@@ -1,0 +1,142 @@
+// Method to get the next frame props to generate
+// the next frame after an action is performed
+
+import { XmtpValidationResponse } from "@xmtp/frames-validator";
+import { PLAY_BUTTONS, SCREEN, handlePlayAction } from "./play";
+
+// Generate an image URL, passing it some data that will help with
+// the image content generation
+const getImageUrl = (
+  conversationId: string,
+  playerAddress: string,
+  screen: SCREEN
+) => {
+  return `${process.env.DOMAIN_URL}/frames/image?data=${encodeURIComponent(
+    JSON.stringify({ conversationId, playerAddress, screen })
+  )}`;
+};
+
+// Get the next frame props, to generate the next frame headers
+// and return them to the client.
+
+export const getNextFrame = async (
+  lastScreen: SCREEN,
+  validatedData: XmtpValidationResponse
+) => {
+  // Getting the gameplay action result
+  const nextScreen = await handlePlayAction(lastScreen, validatedData);
+  const conversationId = validatedData.actionBody.opaqueConversationIdentifier;
+  const playerAddress = validatedData.verifiedWalletAddress;
+  switch (nextScreen) {
+    case SCREEN.PLAY:
+      return {
+        nextScreen,
+        nextFrameProps: {
+          imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/people-playing-paper-rock-scissors-royalty-free-illustration-1583269312.jpg",
+          buttons: PLAY_BUTTONS,
+        },
+      };
+
+    case SCREEN.RESULT_NOT_READY:
+      return {
+        nextScreen,
+        nextFrameProps: {
+          imageUrl: getImageUrl(
+            conversationId,
+            playerAddress,
+            SCREEN.RESULT_NOT_READY
+          ),
+          buttons: ["REFRESH"],
+        },
+      };
+    case SCREEN.RESULT_READY:
+      return {
+        nextScreen,
+        nextFrameProps: {
+          imageUrl: getImageUrl(
+            conversationId,
+            playerAddress,
+            SCREEN.RESULT_READY
+          ),
+          buttons: ["PLAY AGAIN"],
+        },
+      };
+
+    default:
+      throw new Error("Error: did not handle that gameplay case");
+  }
+};
+
+// Helpers to generate the HTML code for a Frame
+// with the appropriate meta tags
+
+export interface IFrameProps {
+  frame?: string;
+  imageUrl: string;
+  buttons?: string[];
+  postUrl?: string;
+  textInput?: string;
+}
+
+export const getFrameMetaTags = ({
+  frame,
+  imageUrl,
+  postUrl,
+  buttons,
+  textInput,
+}: IFrameProps) => {
+  // Default to vNext
+  if (!frame) {
+    frame = "vNext";
+  }
+  // Ensure there are at most four buttons
+  if (buttons && buttons.length > 4) {
+    throw new Error("Maximum of four buttons are allowed per frame.");
+  }
+
+  const metaTags: { [key: string]: string } = {};
+  metaTags["fc:frame"] = frame ? frame : "vNext";
+  metaTags["fc:frame:image"] = imageUrl;
+  metaTags["og:image"] = imageUrl;
+
+  if (buttons) {
+    buttons.forEach((button, index) => {
+      metaTags[`fc:frame:button:${index + 1}`] = button;
+    });
+  }
+
+  if (textInput) {
+    metaTags["fc:frame:input:text"] = textInput;
+  }
+
+  if (postUrl) {
+    metaTags["xmtp:frame:post-url"] = postUrl;
+  }
+
+  return metaTags;
+};
+
+const generateFrameHeaders = (frameProps: IFrameProps): string => {
+  const tags = getFrameMetaTags(frameProps);
+  let metaTag = "";
+  for (const tag in tags) {
+    metaTag += `<meta property="${tag}" content="${tags[tag]}" />\n`;
+  }
+
+  return metaTag;
+};
+
+export const frameGenerator = (frameProps: IFrameProps): string => {
+  const metatagHeaders = generateFrameHeaders(frameProps);
+
+  const html = `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <title>XMTP Frame Example</title>
+      ${metatagHeaders}
+    </head>
+  </html>`;
+  return html;
+};
