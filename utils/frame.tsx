@@ -33,7 +33,7 @@ export const getNextFrame = async (
         nextScreen,
         nextFrameProps: {
           imageUrl:
-            "https://hips.hearstapps.com/hmg-prod/images/people-playing-paper-rock-scissors-royalty-free-illustration-1583269312.jpg",
+            `${process.env.DOMAIN_URL}/frames/image`,
           buttons: PLAY_BUTTONS,
         },
       };
