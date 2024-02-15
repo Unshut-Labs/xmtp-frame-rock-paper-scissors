@@ -6,8 +6,8 @@ import { ImageResponse } from "@vercel/og";
 // This code generates a PNG Image using the ImageResponse helper,
 // using data passed to it (from the URL params) .
 
-const interRegPath = join(process.cwd(), "public/Inter-Regular.ttf");
-let interReg = fs.readFileSync(interRegPath);
+const fontPath = join(process.cwd(), "public/PressStart2P-Regular.ttf");
+let fontReg = fs.readFileSync(fontPath);
 
 type Data = {
   screen: SCREEN;
@@ -29,6 +29,26 @@ export async function generateImage(data: Data) {
   const gameWinner =
     game && data.screen === SCREEN.RESULT_READY ? getWinner(game) : undefined;
 
+  let image = "1";
+  switch (data.screen) {
+    case SCREEN.HOME:
+      image = "1";
+      break;
+    case SCREEN.PLAY:
+      image = "2";
+      break;
+    case SCREEN.RESULT_NOT_READY:
+      image = "3";
+      break;
+    case SCREEN.RESULT_READY:
+      image = gameWinner === data.playerAddress ? "4" : "5";
+      break;
+
+    default:
+      image = "1";
+      break;
+  }
+
   const imageResponse = new ImageResponse(
     (
       <div
@@ -41,49 +61,40 @@ export async function generateImage(data: Data) {
           backgroundColor: "white",
         }}
       >
+        <img src={`${process.env.DOMAIN_URL}/${image}.png`} />
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            paddingLeft: 24,
-            paddingRight: 24,
-            lineHeight: 1.2,
-            fontSize: 36,
-            color: "black",
-            flex: 1,
-            overflow: "hidden",
-            marginTop: 24,
+            width: "100%",
+            height: "18%",
+            position: "absolute",
+            left: 0,
+            bottom: 0,
+            color: "white",
+            fontSize: 35,
           }}
         >
           <div
             style={{
+              width: "40%",
               display: "flex",
-              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              paddingLeft: 40,
             }}
           >
-            You: {playerScore}
-            <br />
-            Other: {otherScore}
-            <br />
-            SCREEN: {data.screen}
-            <br />
-            {data.screen === SCREEN.RESULT_READY && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                WINNER:{" "}
-                {gameWinner
-                  ? gameWinner === data.playerAddress
-                    ? "YOU"
-                    : "OTHER"
-                  : "NO Winner"}
-              </div>
-            )}
+            YOU: {playerScore} PTS
+          </div>
+          <div
+            style={{
+              width: "60%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              paddingRight: 40,
+            }}
+          >
+            OPPONENT: {otherScore} PTS
           </div>
         </div>
       </div>
@@ -93,8 +104,8 @@ export async function generateImage(data: Data) {
       height: 600,
       fonts: [
         {
-          name: "Inter",
-          data: interReg,
+          name: "PressStart",
+          data: fontReg,
           weight: 400,
           style: "normal",
         },
