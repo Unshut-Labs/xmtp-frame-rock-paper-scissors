@@ -72,6 +72,7 @@ export async function generateImage(data: Data) {
             bottom: 0,
             color: "white",
             fontSize: 35,
+            opacity: data.screen === SCREEN.HOME ? 0 : 1,
           }}
         >
           <div
