@@ -2,7 +2,7 @@
 // the next frame after an action is performed
 
 import { XmtpValidationResponse } from "@xmtp/frames-validator";
-import { PLAY_BUTTONS, SCREEN, handlePlayAction } from "./play";
+import { PLAY_BUTTONS_LABELS, SCREEN, handlePlayAction } from "./play";
 
 // Generate an image URL, passing it some data that will help with
 // the image content generation
@@ -32,9 +32,8 @@ export const getNextFrame = async (
       return {
         nextScreen,
         nextFrameProps: {
-          imageUrl:
-            `${process.env.DOMAIN_URL}/frames/image`,
-          buttons: PLAY_BUTTONS,
+          imageUrl: getImageUrl(conversationId, playerAddress, SCREEN.PLAY),
+          buttons: PLAY_BUTTONS_LABELS,
         },
       };
 

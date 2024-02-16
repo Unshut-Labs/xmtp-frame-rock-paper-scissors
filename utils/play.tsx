@@ -7,7 +7,8 @@ import { nanoid } from "nanoid";
 // to frames.
 
 type Move = "ROCK" | "PAPER" | "SCISSORS";
-export const PLAY_BUTTONS = ["ROCK", "PAPER", "SCISSORS"] as Move[];
+const MOVES_ORDER = ["ROCK", "PAPER", "SCISSORS"] as Move[];
+export const PLAY_BUTTONS_LABELS = ["ROCK 🪨", "PAPER 📜", "SCISSORS ✂️"];
 
 type Game = {
   gameId: string;
@@ -158,7 +159,7 @@ export const handlePlayAction = async (
     const isDone = await play(
       validatedData.actionBody.opaqueConversationIdentifier,
       validatedData.verifiedWalletAddress,
-      PLAY_BUTTONS[validatedData.actionBody.buttonIndex - 1]
+      MOVES_ORDER[validatedData.actionBody.buttonIndex - 1]
     );
     if (isDone) {
       return SCREEN.RESULT_READY;
