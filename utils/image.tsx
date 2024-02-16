@@ -41,7 +41,11 @@ export async function generateImage(data: Data) {
       image = "3";
       break;
     case SCREEN.RESULT_READY:
-      image = gameWinner === data.playerAddress ? "4" : "5";
+      image = gameWinner
+        ? gameWinner === data.playerAddress
+          ? "4"
+          : "5"
+        : "6";
       break;
 
     default:
