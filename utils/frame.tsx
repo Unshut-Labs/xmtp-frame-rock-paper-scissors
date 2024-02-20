@@ -114,6 +114,9 @@ export const getFrameMetaTags = ({
     // metaTags["fc:frame:post_url"] = postUrl;
     // Using the Open Frame standard
     metaTags["of:post_url"] = postUrl;
+    // Support legacy xmtp:frame:post-url until
+    // the new Converse app is out
+    metaTags["xmtp:frame:post-url"] = postUrl;
   }
 
   return metaTags;
