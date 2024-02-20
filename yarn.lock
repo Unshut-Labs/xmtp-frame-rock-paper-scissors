@@ -151,20 +151,22 @@
   dependencies:
     "@noble/hashes" "1.3.2"
 
+"@noble/curves@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.3.0.tgz#01be46da4fd195822dab821e72f71bf4aeec635e"
+  integrity sha512-t01iSXPuN+Eqzb4eBX0S5oubSqXbK/xXa1Ne18Hj8f9pStxztHCE2gfboSp/dZRLSqfuLpRK2nDXDK+W9puocA==
+  dependencies:
+    "@noble/hashes" "1.3.3"
+
 "@noble/hashes@1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.2.tgz#6f26dbc8fbc7205873ce3cee2f690eba0d421b39"
   integrity sha512-MVC8EAQp7MvEcm30KWENFjgR+Mkmf+D189XJTkFIlwohU5hcBbn1ZkKq7KVTi2Hme3PMGF390DaL52beVrIihQ==
 
-"@noble/hashes@^1.3.3", "@noble/hashes@~1.3.0", "@noble/hashes@~1.3.2":
+"@noble/hashes@1.3.3", "@noble/hashes@^1.3.3", "@noble/hashes@~1.3.0", "@noble/hashes@~1.3.2":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.3.tgz#39908da56a4adc270147bb07968bf3b16cfe1699"
   integrity sha512-V7/fPHgl+jsVPXqqeOzT8egNj2iBIVt+ECeMMG8TdcnTikP3oaBtUVqpT/gYCR68aEBJSF+XbYUxStjbFMqIIA==
-
-"@noble/secp256k1@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-2.0.0.tgz#c214269d45e0233ad6a8ae5104655453636e253d"
-  integrity sha512-rUGBd95e2a45rlmFTqQJYEFA4/gdIARFfuTuTqLglz0PZ6AKyzyXsEZZq7UZn8hZsvaBgpCzKKBJizT2cJERXw==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -404,13 +406,13 @@
     satori "0.10.9"
     yoga-wasm-web "0.3.3"
 
-"@xmtp/frames-validator@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@xmtp/frames-validator/-/frames-validator-0.4.0.tgz#35aa19801d0296dfc837dc19eb310b2097d8dd44"
-  integrity sha512-awUChzMzIdw2nmM7iixkc86bX5aP0+tx0LIHpP0vFKEABa8QU5y4Hq15s3oiRYFMAD0V36HMbw7XeJ06L1iclA==
+"@xmtp/frames-validator@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@xmtp/frames-validator/-/frames-validator-0.5.0.tgz#ac48530560891b189a65f7b9defb0b7de4f72d3e"
+  integrity sha512-dHlRxnMScewWFmhMKaZisnMMKot7iXozQtI9q4soTR21Hfe8vQhU6dqYrprZDW+NYJVPWyANBEwXsD/GC7tq2g==
   dependencies:
+    "@noble/curves" "^1.3.0"
     "@noble/hashes" "^1.3.3"
-    "@noble/secp256k1" "^2.0.0"
     "@xmtp/proto" "3.41.0-beta.6"
     viem "^2.7.8"
 

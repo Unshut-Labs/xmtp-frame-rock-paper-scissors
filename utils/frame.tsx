@@ -98,6 +98,7 @@ export const getFrameMetaTags = ({
   metaTags["fc:frame"] = frame ? frame : "vNext";
   metaTags["fc:frame:image"] = imageUrl;
   metaTags["og:image"] = imageUrl;
+  metaTags["of:accepts:xmtp"] = "2024-02-01";
 
   if (buttons) {
     buttons.forEach((button, index) => {
@@ -110,7 +111,9 @@ export const getFrameMetaTags = ({
   }
 
   if (postUrl) {
-    metaTags["xmtp:frame:post-url"] = postUrl;
+    // metaTags["fc:frame:post_url"] = postUrl;
+    // Using the Open Frame standard
+    metaTags["of:post_url"] = postUrl;
   }
 
   return metaTags;

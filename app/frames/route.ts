@@ -13,6 +13,14 @@ const getScreen = (request: Request) => {
 export async function POST(request: Request) {
   const body = await request.json();
   const currentScreen = getScreen(request);
+
+  if (!body.clientProtocol?.startsWith("xmtp")) {
+    return Response.json(
+      { error: "This Frame only supports the XMTP protocol" },
+      { status: 400 }
+    );
+  }
+
   // The validateFramesPost method of the @xmtp/frames-validator
   // module validates & decodes the trustedPayload so we're
   // sure we're handling "real" data
