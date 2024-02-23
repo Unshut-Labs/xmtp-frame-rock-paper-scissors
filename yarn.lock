@@ -406,20 +406,20 @@
     satori "0.10.9"
     yoga-wasm-web "0.3.3"
 
-"@xmtp/frames-validator@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@xmtp/frames-validator/-/frames-validator-0.5.0.tgz#ac48530560891b189a65f7b9defb0b7de4f72d3e"
-  integrity sha512-dHlRxnMScewWFmhMKaZisnMMKot7iXozQtI9q4soTR21Hfe8vQhU6dqYrprZDW+NYJVPWyANBEwXsD/GC7tq2g==
+"@xmtp/frames-validator@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@xmtp/frames-validator/-/frames-validator-0.5.1.tgz#fa2465ec40167f151f981a0bfdd0b57c0c8fbae0"
+  integrity sha512-VG6LR+WNz4LGw67+yDMaBZc97s8LeZmE1O78DvdbcyxO9VOwPXg/CxEO+m6Pn35jfKqznMIbd+2skMsnoek+cA==
   dependencies:
     "@noble/curves" "^1.3.0"
     "@noble/hashes" "^1.3.3"
-    "@xmtp/proto" "3.41.0-beta.6"
+    "@xmtp/proto" "3.44.0"
     viem "^2.7.8"
 
-"@xmtp/proto@3.41.0-beta.6":
-  version "3.41.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@xmtp/proto/-/proto-3.41.0-beta.6.tgz#08e82888095acbf618c1ed4e8fe903570a6391ae"
-  integrity sha512-W1fyAb62Kyn+UOSslFSQbvYFKI9hrS5reoSWzzNw58aUc0i13re/RyDB+k5bFkMMwKfkf5QQuveSPoy7TTWdPw==
+"@xmtp/proto@3.44.0":
+  version "3.44.0"
+  resolved "https://registry.yarnpkg.com/@xmtp/proto/-/proto-3.44.0.tgz#6750f47869de508c2f3db596bb952e84062988bd"
+  integrity sha512-5M23JsxONb/qluZF6QMjoXHT67xDRR7pWwHTd1tfw59jS+jXTxm/+v8/UeSOoK47PBSJhDD5I90bAeA5NrLRig==
   dependencies:
     long "^5.2.0"
     protobufjs "^7.0.0"

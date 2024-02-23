@@ -76,11 +76,13 @@ export interface IFrameProps {
   buttons?: string[];
   postUrl?: string;
   textInput?: string;
+  imageAspectRatio?: "1.91:1" | "1:1";
 }
 
 export const getFrameMetaTags = ({
   frame,
   imageUrl,
+  imageAspectRatio,
   postUrl,
   buttons,
   textInput,
@@ -117,6 +119,10 @@ export const getFrameMetaTags = ({
     // Support legacy xmtp:frame:post-url until
     // the new Converse app is out
     metaTags["xmtp:frame:post-url"] = postUrl;
+  }
+
+  if (imageAspectRatio) {
+    metaTags["fc:frame:image:aspect_ratio"] = imageAspectRatio;
   }
 
   return metaTags;
